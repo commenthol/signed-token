@@ -1,0 +1,42 @@
+{
+  "name": "signed-token",
+  "version": "0.0.0",
+  "description": "signed crypto token",
+  "keywords": [
+    "crypto",
+    "signed",
+    "token"
+  ],
+  "license": "Unlicense",
+  "author": "commenthol <commenthol@gmail.com>",
+  "main": "src",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "all": "npm run lint && npm test",
+    "lint": "eslint '**/*.js'",
+    "test": "mocha"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard"
+    ]
+  },
+  "dependencies": {
+    "url-safe-base64": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^3.3.0"
+  },
+  "engine": {
+    "node": ">=6.0.0"
+  }
+}
