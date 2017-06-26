@@ -61,10 +61,10 @@ const signedToken = (secret, opts) => {
       promise = new Promise((resolve) => resolve())
     }
     return promise
-    .then((buffer) => {
-      const common = (token || buffer.toString('base64')).substr(0, _opts.commonlen)
-      return _create(common)
-    })
+      .then((buffer) => {
+        const common = (token || buffer.toString('base64')).substr(0, _opts.commonlen)
+        return _create(common)
+      })
   }
 
   const _commonSync = (token) => {
@@ -90,7 +90,7 @@ const signedToken = (secret, opts) => {
   */
   const verify = (token) => (
     _common(decode(token || ''))
-    .then((freshToken) => (constTimeCompare(token, freshToken) ? token : undefined))
+      .then((freshToken) => (constTimeCompare(token, freshToken) ? token : undefined))
   )
 
   /**
