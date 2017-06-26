@@ -48,11 +48,11 @@ describe('#signedToken', function () {
     }, /signed token needs a greater tokenlen/)
   })
 
-  describe('should generate a token', function () {
+  describe('should create a token', function () {
     tests.forEach((test) => {
       it(test.name, function () {
         return signedToken(secret, test.opts)
-          .generate()
+          .create()
           .then((tokenVal) => {
             // console.log(tokenVal)
             assert.equal(typeof tokenVal, 'string')
@@ -61,7 +61,7 @@ describe('#signedToken', function () {
       })
 
       it(test.name + ' - sync', function () {
-        const tokenVal = signedToken(secret, test.opts).generateSync()
+        const tokenVal = signedToken(secret, test.opts).createSync()
         // console.log(tokenVal)
         assert.equal(typeof tokenVal, 'string')
         assert.equal(tokenVal.length, test.length)
@@ -69,11 +69,11 @@ describe('#signedToken', function () {
     })
   })
 
-  describe('should validate token', function () {
+  describe('should verify token', function () {
     tests.forEach((test) => {
       it(test.name, function () {
         return signedToken(secret, test.opts)
-          .validate(test.token)
+          .verify(test.token)
           .then((tokenVal) => {
             assert.equal(typeof tokenVal, 'string')
             assert.equal(tokenVal.length, test.length)
@@ -81,21 +81,21 @@ describe('#signedToken', function () {
       })
 
       it(test.name + ' - sync', function () {
-        const tokenVal = signedToken(secret, test.opts).validateSync(test.token)
+        const tokenVal = signedToken(secret, test.opts).verifySync(test.token)
         assert.equal(typeof tokenVal, 'string')
         assert.equal(tokenVal.length, test.length)
       })
 
       it(test.name + ' - bad case', function () {
         return signedToken(secret, test.opts)
-          .validate(test.token + '7')
+          .verify(test.token + '7')
           .then((tokenVal) => {
             assert.equal(typeof tokenVal, 'undefined')
           })
       })
 
       it(test.name + ' - sync bad case', function () {
-        const tokenVal = signedToken(secret, test.opts).validateSync(test.token + '7')
+        const tokenVal = signedToken(secret, test.opts).verifySync(test.token + '7')
         assert.equal(typeof tokenVal, 'undefined')
       })
     })

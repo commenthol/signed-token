@@ -13,10 +13,10 @@ Requires node >= v6.0.0
 * [Example](#example)
 * [API](#api)
   * [`signedToken(secret, [opts])`](#signedtokensecret-opts)
-  * [`generate`](#generate)
-  * [`generateSync`](#generatesync)
-  * [`validate`](#validate)
-  * [`validateSync`](#validatesync)
+  * [`create`](#create)
+  * [`createSync`](#createsync)
+  * [`verify`](#verify)
+  * [`verifySync`](#verifysync)
 * [Installation](#installation)
 * [Tests](#tests)
 * [LICENSE](#license)
@@ -29,8 +29,8 @@ Asynchronous using Promises
 const signedToken = require('signed-token')
 
 const stfn = signedToken('my secret')
-stfn.generate()
-.then((token) => stfn.validate(token))
+stfn.create()
+.then((token) => stfn.verify(token))
 .then((res) => console.log(res)) // res === token
 ```
 
@@ -40,8 +40,8 @@ Synchronous
 const signedToken = require('signed-token')
 
 const stfn = signedToken('my secret')
-const token = stfn.generateSync()
-const res = stfn.validateSync(token)
+const token = stfn.createSync()
+const res = stfn.verifySync(token)
 res === token
 //> true
 ```
@@ -62,27 +62,27 @@ creates a signedToken instance, wrapping `secret`
 | `[opts.commonlen=24]`  | number | _optional:_ length of random bytes for common length |
 | `[opts.tokenlen=64]`   | number | _optional:_ length of token                          |
 
-**Returns** `object`, `{generate, validate, generateSync, validateSync, hmac}`
+**Returns** `object`, `{create, verify, createSync, verifySync, hmac}`
 
-### `generate`
+### `create`
 
-generates a signed token
+creates a signed token
 
 **Returns** `Promise`, `{string}` signed token url safe base64 encoded
 
-### `generateSync`
+### `createSync`
 
 sync generation of a signed token
 
 **Returns** `string` signed token url safe base64 encoded
 
-### `validate`
+### `verify`
 
-validate a signed token using secret
+verify a signed token using secret
 
 **Returns** `Promise`, `{string|undefined}` - token if it was correctly signed
 
-### `validateSync`
+### `verifySync`
 
 sync validation of signed token
 

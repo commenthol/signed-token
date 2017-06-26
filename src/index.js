@@ -11,19 +11,19 @@ const randomBytes = promisify(crypto.randomBytes)
 * @param {string} [opts.digest=sha265] - hmac digest
 * @param {number} [opts.commonlen=24] - length of random bytes for common length
 * @param {number} [opts.tokenlen=64] - length of token
-* @returns {object} - `{generate, validate, hmac}`
+* @returns {object} - `{create, verify, hmac}`
 * @example - asynchronous
 * const signedToken = require('signed-token')
 * const stfn = signedToken('my secret')
-* stfn.generate()
-* .then((token) => stfn.validate(token))
+* stfn.create()
+* .then((token) => stfn.verify(token))
 * .then((res) => console.log(res)) // equals `token`
 *
 * @example - synchronous
 * const signedToken = require('signed-token')
 * const stfn = signedToken('my secret')
-* const token = stfn.generateSync()
-* const res = stfn.validateSync(token)
+* const token = stfn.createSync()
+* const res = stfn.verifySync(token)
 * res === token
 * //> true
 */
@@ -46,7 +46,7 @@ const signedToken = (secret, opts) => {
     .update(token)
     .digest('base64'))
 
-  const _generate = (common) => {
+  const _create = (common) => {
     const hash = hmac(common)
     let enc = encode(`${common}${hash}`)
     if (_opts.tokenlen) enc = enc.substr(0, _opts.tokenlen)
@@ -63,32 +63,32 @@ const signedToken = (secret, opts) => {
     return promise
     .then((buffer) => {
       const common = (token || buffer.toString('base64')).substr(0, _opts.commonlen)
-      return _generate(common)
+      return _create(common)
     })
   }
 
   const _commonSync = (token) => {
     const common = (token || crypto.randomBytes(_opts.commonlen * 2).toString('base64')).substr(0, _opts.commonlen)
-    return _generate(common)
+    return _create(common)
   }
 
   /**
-  * generates a signed token
+  * creates a signed token
   * @return {Promise} - {string} signed token url safe base64 encoded
   */
-  const generate = () => _common()
+  const create = () => _common()
 
   /**
   * sync generation of a signed token
   * @return {string} signed token url safe base64 encoded
   */
-  const generateSync = () => _commonSync()
+  const createSync = () => _commonSync()
 
   /**
-  * validate a signed token using `secret`
+  * verify a signed token using `secret`
   * @return {Promise} - {string|null} - token if it was correctly signed
   */
-  const validate = (token) => (
+  const verify = (token) => (
     _common(decode(token || ''))
     .then((freshToken) => (constTimeCompare(token, freshToken) ? token : undefined))
   )
@@ -97,12 +97,12 @@ const signedToken = (secret, opts) => {
   * sync validation of signed token
   * @return {String|Null} - token if it was correctly signed
   */
-  const validateSync = (token) => {
+  const verifySync = (token) => {
     const freshToken = _commonSync(decode(token || ''))
     return (constTimeCompare(token, freshToken) ? token : undefined)
   }
 
-  return {generate, generateSync, validate, validateSync, hmac}
+  return {create, createSync, verify, verifySync, hmac}
 }
 
 module.exports = signedToken
