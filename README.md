@@ -4,7 +4,8 @@
 
 [![NPM version](https://badge.fury.io/js/signed-token.svg)](https://www.npmjs.com/package/signed-token/)
 
-Generation and validation of signed HMAC token with variable lengths.
+Generation and validation of signed HMAC token with variable lengths. 
+The token is [url-safe Base64](https://www.npmjs.com/package/url-safe-base64) encoded and can be used in urls as well as forms.
 
 Requires node >= v6.0.0
 

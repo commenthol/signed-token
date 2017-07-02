@@ -38,5 +38,13 @@
   },
   "engine": {
     "node": ">=6.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commenthol/signed-token.git"
+  },
+  "bugs": {
+    "url": "https://github.com/commenthol/signed-token/issues"
+  },
+  "homepage": "https://github.com/commenthol/signed-token#readme"
 }
