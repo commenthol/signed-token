@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
+    "compare-timing-safe": "^1.0.0",
     "url-safe-base64": "^1.1.0"
   },
   "devDependencies": {

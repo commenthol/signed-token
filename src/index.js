@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const timingSafeEqual = require('compare-timing-safe')
 const promisify = require('./promisify')
 const {encode, decode, trim} = require('url-safe-base64')
 
@@ -90,7 +91,7 @@ const signedToken = (secret, opts) => {
   */
   const verify = (token) => (
     _common(decode(token || ''))
-      .then((freshToken) => (constTimeCompare(token, freshToken) ? token : undefined))
+      .then((freshToken) => (timingSafeEqual(token, freshToken) ? token : undefined))
   )
 
   /**
@@ -99,22 +100,10 @@ const signedToken = (secret, opts) => {
   */
   const verifySync = (token) => {
     const freshToken = _commonSync(decode(token || ''))
-    return (constTimeCompare(token, freshToken) ? token : undefined)
+    return (timingSafeEqual(token, freshToken) ? token : undefined)
   }
 
   return {create, createSync, verify, verifySync, hmac}
 }
 
 module.exports = signedToken
-
-/**
-* string comparison in length-constant time
-*/
-function constTimeCompare (a = '', b = '') {
-  let diff = (a.length !== b.length)
-  const len = Math.min(a.length, b.length)
-  for (let i = 0; i < len; i++) {
-    diff |= (a[i] !== b[i])
-  }
-  return (!!diff === false)
-}
