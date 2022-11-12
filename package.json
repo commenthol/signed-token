@@ -1,6 +1,6 @@
 {
   "name": "signed-token",
-  "version": "1.1.2",
+  "version": "2.0.0-0",
   "description": "signed crypto token",
   "keywords": [
     "crypto",
@@ -17,38 +17,57 @@
   },
   "license": "Unlicense",
   "author": "commenthol <commenthol@gmail.com>",
-  "main": "src",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib/index.cjs",
+      "import": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./src/index.js",
   "directories": {
     "test": "test"
   },
   "files": [
-    "src"
+    "src",
+    "lib",
+    "types"
   ],
   "scripts": {
-    "all": "npm run lint && npm test",
-    "lint": "eslint '**/*.js'",
-    "test": "mocha"
+    "build": "rm -r lib/*; rollup -c rollup.conf.js",
+    "ci": "npm run build && npm run lint && npm test && npm run types",
+    "lint": "eslint --ext .js .",
+    "test": "mocha",
+    "types": "rm -r types; tsc --emitDeclarationOnly true --noEmitOnError && cp ./src/*.d.ts ./types"
   },
   "eslintConfig": {
     "extends": [
       "standard"
     ]
   },
+  "mocha": {
+    "checkLeaks": true,
+    "colors": true
+  },
   "dependencies": {
     "compare-timing-safe": "^2.1.0",
     "url-safe-base64": "^1.2.0"
   },
   "devDependencies": {
+    "@types/node": "^18.11.9",
     "eslint": "^8.27.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.5.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-standard": "^5.0.0",
-    "mocha": "^10.1.0"
+    "mocha": "^10.1.0",
+    "rollup": "^3.3.0",
+    "typescript": "^4.8.4"
   },
   "engine": {
-    "node": ">=6.0.0"
+    "node": ">=12.0.0"
   }
 }

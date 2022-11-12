@@ -1,8 +1,8 @@
 /* global describe, it */
 /* eslint no-multi-spaces:0 */
 
-const assert = require('assert')
-const signedToken = require('..')
+import assert from 'assert'
+import signedToken from '../src/index.js'
 
 describe('#signedToken', function () {
   const secret = 'curiosity killed the cat'

@@ -7,8 +7,6 @@
 Generation and validation of signed HMAC token with variable lengths. 
 The token is [url-safe Base64](https://www.npmjs.com/package/url-safe-base64) encoded and can be used in urls as well as forms.
 
-Requires node >= v6.0.0
-
 ## TOC
 
 * [Example](#example)
@@ -87,12 +85,12 @@ verify a signed token using secret
 
 sync validation of signed token
 
-**Returns** `String,undefined`,
+**Returns** `string,undefined`,
 token if it was correctly signed
 
 ## Installation
 
-Requires [nodejs](http://nodejs.org/) >= v6.0.0
+Requires [nodejs](http://nodejs.org/) >= v12.0.0
 
 ```sh
 $ npm install --save signed-token
