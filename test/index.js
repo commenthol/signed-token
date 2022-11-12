@@ -15,22 +15,22 @@ describe('#signedToken', function () {
       token: 'zNVuk8jR2aBHvpmr75jnUqOiqjsYUqt_QoqXljhXkeS7ItDEDHufBEaMra8GGjSw'
     }, {
       name: 'tokenlen=0',
-      opts: {tokenlen: 0},
+      opts: { tokenlen: 0 },
       length: 67,
       token: 'zNVuk8jR2aBHvpmr75jnUqOiqjsYUqt_QoqXljhXkeS7ItDEDHufBEaMra8GGjSw7VI'
     }, {
       name: 'commonlen=10',
-      opts: {commonlen: 10},
+      opts: { commonlen: 10 },
       length: 53,
       token: '-FxdR3YcKnaNfrYrjJVIrUAn8VpAXTa2Nq76ANAx5i-QYw7aEzNqo'
     }, {
       name: 'commonlen=8, tokenlen=16',
-      opts: {commonlen: 8, tokenlen: 16},
+      opts: { commonlen: 8, tokenlen: 16 },
       length: 16,
       token: 'zNVuk8jR5pWwHgVi'
     }, {
       name: 'digest=sha1',
-      opts: {digest: 'sha1'},
+      opts: { digest: 'sha1' },
       length: 51,
       token: '2WmSUH8SWAtrPEQnXOgLrAMZdUaYe0e8gVloEYifL8oGwQb4NWE'
     }
@@ -44,7 +44,7 @@ describe('#signedToken', function () {
 
   describe('should throw on bad tokenlen', function () {
     assert.throws(() => {
-      signedToken('secret', {commonlen: 12, tokenlen: 14})
+      signedToken('secret', { commonlen: 12, tokenlen: 14 })
     }, /signed token needs a greater tokenlen/)
   })
 

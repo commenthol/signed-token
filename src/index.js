@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const timingSafeEqual = require('compare-timing-safe')
 const promisify = require('./promisify')
-const {encode, decode, trim} = require('url-safe-base64')
+const { encode, decode, trim } = require('url-safe-base64')
 
 const randomBytes = promisify(crypto.randomBytes)
 
@@ -103,7 +103,7 @@ const signedToken = (secret, opts) => {
     return (timingSafeEqual(token, freshToken) ? token : undefined)
   }
 
-  return {create, createSync, verify, verifySync, hmac}
+  return { create, createSync, verify, verifySync, hmac }
 }
 
 module.exports = signedToken
