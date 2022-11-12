@@ -3,6 +3,7 @@
 > signed HMAC crypto token
 
 [![NPM version](https://badge.fury.io/js/signed-token.svg)](https://www.npmjs.com/package/signed-token/)
+[![Build Status](https://github.com/commenthol/signed-token/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/commenthol/signed-token/actions/workflows/ci.yml?query=branch%3Amaster)
 
 Generation and validation of signed HMAC token with variable lengths. 
 The token is [url-safe Base64](https://www.npmjs.com/package/url-safe-base64) encoded and can be used in urls as well as forms.
