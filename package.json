@@ -21,6 +21,9 @@
   "directories": {
     "test": "test"
   },
+  "files": [
+    "src"
+  ],
   "scripts": {
     "all": "npm run lint && npm test",
     "lint": "eslint '**/*.js'",
